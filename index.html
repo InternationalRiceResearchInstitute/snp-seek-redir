@@ -3,222 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNP-Seek Database - Temporary Downtime Notice</title>
+    <title>SNP-Seek Database — Temporary Downtime Notice</title>
     <style>
+        :root {
+            --teal: #0e7c66;
+            --teal-dark: #0a5c4c;
+            --ink: #17344f;
+            --muted: #5b6b7b;
+            --line: #e3ece8;
+            --bg: #f2f7f4;
+            --card: #ffffff;
+            --a: #2f9e6e;
+            --t: #e0567a;
+            --g: #e0a13d;
+            --c: #3d7fd6;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom right,
-		#059669, #0d9488, #0e7490);
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--ink);
             min-height: 100vh;
-            padding: 20px;
+            padding: 20px 16px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background:
+                radial-gradient(1000px 420px at 15% -10%, rgba(14, 124, 102, 0.12), transparent 60%),
+                radial-gradient(900px 480px at 110% 10%, rgba(61, 127, 214, 0.10), transparent 60%),
+                radial-gradient(700px 500px at 50% 120%, rgba(224, 161, 61, 0.08), transparent 60%),
+                var(--bg);
         }
 
         .container {
-            max-width: 900px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 720px;
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: 0 24px 60px rgba(23, 52, 79, 0.14);
             overflow: hidden;
+            border: 1px solid rgba(14, 124, 102, 0.12);
+        }
+
+        /* ---- decorative nucleotide ribbon along the top edge ---- */
+        .top-ribbon {
+            height: 5px;
+            background: linear-gradient(90deg,
+                var(--a) 0%, var(--a) 10%,
+                var(--t) 10%, var(--t) 20%,
+                var(--g) 20%, var(--g) 30%,
+                var(--c) 30%, var(--c) 40%,
+                var(--a) 40%, var(--a) 50%,
+                var(--t) 50%, var(--t) 60%,
+                var(--g) 60%, var(--g) 70%,
+                var(--c) 70%, var(--c) 80%,
+                var(--a) 80%, var(--a) 90%,
+                var(--t) 90%, var(--t) 100%);
         }
 
         .header {
-            background: #00695C;
-            color: white;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
+            padding: 30px 30px 22px;
         }
 
-        .header h1 {
-            font-size: 28px;
+        .dna {
+            width: 44px;
+            height: 64px;
+            margin-bottom: 14px;
+            animation: float 5s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(14, 124, 102, 0.22));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .dna .strand-a { stroke: var(--teal); }
+        .dna .strand-b { stroke: var(--c); }
+        .dna .rung { stroke: rgba(23, 52, 79, 0.28); stroke-width: 2; }
+
+        .header-text h1 {
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+        }
+
+        .header-text .subtitle {
+            margin-top: 7px;
+            font-size: 14.5px;
+            color: var(--muted);
+        }
+
+        .header-text .subtitle strong {
+            color: var(--teal);
             font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .header .subtitle {
-            font-size: 16px;
-            opacity: 0.9;
         }
 
         .content {
-            padding: 40px;
+            padding: 8px 40px 28px;
         }
 
         .notice-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 4px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            background: #fff8e8;
+            border: 1px solid #f2ddb0;
+            border-left: 4px solid #eaa83c;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin-bottom: 24px;
+        }
+
+        .notice-box .notice-icon {
+            font-size: 19px;
         }
 
         .notice-box p {
-            color: #856404;
+            color: #7a5c1a;
             line-height: 1.6;
-            font-size: 15px;
+            font-size: 14.5px;
         }
 
-        .section {
-            margin-bottom: 30px;
+        .notice-box p strong {
+            color: #6b4e12;
         }
 
-        .section h2 {
-            color: #2d5aa6;
-            font-size: 20px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
         }
 
-        .mirror-list {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
+        .section-title .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 0 3px rgba(14, 124, 102, 0.15);
         }
 
+        .section-title h2 {
+            font-size: 17.5px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .section-title .hint {
+            margin-left: auto;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* ---- mirror card ---- */
         .mirror-item {
             display: flex;
             align-items: center;
-            padding: 15px;
-            margin-bottom: 10px;
-            background: white;
-            border-radius: 6px;
-            border: 1px solid #e0e0e0;
-            transition: all 0.3s ease;
+            gap: 16px;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f6fbf9 100%);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            transition: all 0.25s ease;
+            margin-bottom: 18px;
         }
 
         .mirror-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .mirror-item:last-child {
-            margin-bottom: 0;
+            border-color: rgba(14, 124, 102, 0.45);
+            box-shadow: 0 10px 24px rgba(23, 52, 79, 0.10);
         }
 
         .mirror-icon {
-            width: 40px;
-            height: 40px;
-            background: #2d5aa6;
-            border-radius: 50%;
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
-            color: white;
-            font-weight: bold;
+            color: #fff;
+            box-shadow: 0 6px 14px rgba(14, 124, 102, 0.28);
+        }
+
+        .mirror-icon svg {
+            width: 25px;
+            height: 25px;
+        }
+
+        .mirror-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mirror-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 3px;
+        }
+
+        .mirror-status .pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--teal);
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(14, 124, 102, 0.45); }
+            50% { box-shadow: 0 0 0 5px rgba(14, 124, 102, 0); }
         }
 
         .mirror-link {
-            color: #2d5aa6;
+            color: var(--ink);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
+            font-size: 16.5px;
+            font-weight: 600;
         }
 
         .mirror-link:hover {
-            text-decoration: underline;
+            color: var(--teal);
+        }
+
+        .mirror-link .domain {
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .mirror-arrow {
+            flex-shrink: 0;
+            color: var(--teal);
+            transition: transform 0.25s ease;
+        }
+
+        .mirror-item:hover .mirror-arrow {
+            transform: translateX(4px);
         }
 
         .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 20px;
-            border-radius: 4px;
-            margin-bottom: 20px;
+            display: flex;
+            gap: 13px;
+            align-items: center;
+            background: #eef5f3;
+            border: 1px solid #d4e6e0;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 22px;
+        }
+
+        .info-box svg {
+            flex-shrink: 0;
+            width: 19px;
+            height: 19px;
+            color: var(--teal);
         }
 
         .info-box p {
-            color: #1565c0;
+            color: #42614f;
             line-height: 1.6;
             font-size: 14px;
         }
 
-        .footer {
-            background: #f8f9fa;
-            padding: 25px 40px;
-            border-top: 1px solid #e0e0e0;
-            color: #666;
+        .info-box p strong {
+            font-weight: 600;
+            color: #31513f;
+        }
+
+        .note {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            line-height: 1.7;
             font-size: 14px;
         }
 
-        .footer strong {
-            color: #333;
+        .note .spacer {
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--line);
         }
 
-        @media (max-width: 768px) {
-            .header {
-                padding: 30px 20px;
-            }
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: linear-gradient(180deg, #f6fbf9, #eef5f3);
+            padding: 16px 40px;
+            border-top: 1px solid var(--line);
+            font-size: 14px;
+            color: var(--muted);
+        }
 
-            .header h1 {
-                font-size: 24px;
-            }
+        .footer strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
 
-            .content {
-                padding: 30px 20px;
-            }
+        .footer .team {
+            color: var(--teal);
+            font-weight: 600;
+        }
 
-            .footer {
-                padding: 20px;
-            }
+        @media (max-width: 560px) {
+            body { padding: 12px 10px; }
+            .header { padding: 22px 18px 18px; }
+            .header-text h1 { font-size: 22px; }
+            .content { padding: 6px 18px 20px; }
+            .mirror-link .domain { display: block; }
+            .footer { padding: 14px 18px; justify-content: center; text-align: center; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="top-ribbon"></div>
+
         <div class="header">
-            <h1>SNP-Seek Rice Database</h1>
-            <p class="subtitle">Hosted at International Rice Research Institute (IRRI)</p>
+            <svg class="dna" viewBox="0 0 120 180" fill="none" aria-hidden="true">
+                <polyline class="strand-a" points="60,10 95,30 60,50 25,70 60,90 95,110 60,130 25,150 60,170"
+                    fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline class="strand-b" points="60,10 25,30 60,50 95,70 60,90 25,110 60,130 95,150 60,170"
+                    fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <line class="rung" x1="95" y1="30" x2="25" y2="30"/>
+                <line class="rung" x1="95" y1="70" x2="25" y2="70"/>
+                <line class="rung" x1="95" y1="110" x2="25" y2="110"/>
+                <line class="rung" x1="95" y1="150" x2="25" y2="150"/>
+            </svg>
+            <div class="header-text">
+                <h1>SNP-Seek Rice Database</h1>
+                <p class="subtitle">Hosted at <strong>International Rice Research Institute (IRRI)</strong></p>
+            </div>
         </div>
 
         <div class="content">
             <div class="notice-box">
-                <p><strong>⚠️ Temporary Service Interruption</strong><br>
-                Due to current funding challenges, the IRRI-hosted SNP-Seek rice database is temporarily offline.</p>
+                <div class="notice-icon">&#9888;&#65039;</div>
+                <p><strong>Temporary Service Interruption.</strong> Due to current funding challenges, the IRRI-hosted SNP-Seek rice database is temporarily offline.</p>
             </div>
 
-            <div class="section">
-                <h2>Available Mirror Sites</h2>
-                <p style="margin-bottom: 20px; color: #666; line-height: 1.6;">
-                    In the meantime, mirror sites are available at the following web addresses:
-                </p>
-                
-                <div class="mirror-list">
-                    <div class="mirror-item">
-                        <div class="mirror-icon">1</div>
-                        <a href="https://snpseekv3.duckdns.org/v3/" class="mirror-link" target="_blank">SNP-Seek @ ASTI DOST</a>
-                    </div>
-                    <div class="mirror-item">
-                        <div class="mirror-icon">2</div>
-                        <span class="mirror-link">SNP-Seek @ BRS</span>
-                    </div>
+            <div class="section-title">
+                <span class="dot"></span>
+                <h2>Available Mirror</h2>
+                <span class="hint">active now</span>
+            </div>
+
+            <div class="mirror-item">
+                <div class="mirror-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
                 </div>
+                <div class="mirror-body">
+                    <div class="mirror-status"><span class="pulse"></span> Online mirror</div>
+                    <a href="https://snp-seek.org" class="mirror-link" target="_blank" rel="noopener">
+                        SNP-Seek <span class="domain">&#8594; snp-seek.org</span>
+                    </a>
+                </div>
+                <svg class="mirror-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 12h8"></path>
+                    <path d="m13 8 4 4-4 4"></path>
+                </svg>
             </div>
 
             <div class="info-box">
-                <p><strong>ℹ️ Please Note:</strong> These servers have smaller underlying infrastructure, so expect some slower responses from these resources.</p>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <p><strong>Please Note:</strong> This server runs on a smaller infrastructure, so expect somewhat slower responses than the IRRI-hosted service.</p>
             </div>
 
-            <div class="section">
-                <p style="color: #666; line-height: 1.8;">
-                    We appreciate your patience and understanding during this transition period. 
-                    The team is working diligently to restore full services as soon as possible.
-                </p>
+            <div class="note">
+                <span class="spacer"></span>
+                We appreciate your patience and understanding during this transition period. The team is working diligently to restore full services.
             </div>
         </div>
 
         <div class="footer">
-            <p><strong>Thank you for your understanding.</strong></p>
-            <p style="margin-top: 10px;">The Bioinformatics Team at IRRI</p>
+            <strong>Thank you for your understanding.</strong>
+            <span class="team">The Bioinformatics Team at IRRI</span>
         </div>
     </div>
 </body>
